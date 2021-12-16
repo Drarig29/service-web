@@ -4,7 +4,17 @@ class LoanController {
     }
 
     getAll(req, res) {
-        const copies = this.loanRepository.getAll();
+        const loans = this.loanRepository.getAll();
+        res.json(loans);
+    }
+
+    getLoansByUser(req, res) {
+        const loans = this.loanRepository.getLoansByUser(req.params.userId);
+        res.json(loans);
+    }
+
+    getAvailableCopies(req, res) {
+        const copies = this.loanRepository.getAvailableCopies(req.params.bookId);
         res.json(copies);
     }
 

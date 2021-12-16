@@ -19,6 +19,22 @@ class LoanRepository {
         return this.db.getData("/loans");
     }
 
+    getLoansByUser(userId) {
+        const userPath = this.userRepository.getIdPath(userId);
+        if (userPath == null) {
+            throw new ValidationError('This user does not exists')
+        }
+
+        const loans = this.getAll();
+        return _.filter(loans, { userId });
+    }
+
+    getAvailableCopies(bookId) {
+        const copies = this.copyRepository.getAll(bookId);
+        const loans = this.getAll();
+        return _.filter(copies, ({ id }) => !_.some(loans, { copyId: id }));
+    }
+
     add(loan) {
         const userPath = this.userRepository.getIdPath(loan.userId);
         if (userPath == null) {
