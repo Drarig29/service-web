@@ -30,6 +30,11 @@ class LoanRepository {
             throw new ValidationError('This copy does not exists')
         }
 
+        const loans = this.getAll();
+        if (_.some(loans, { copyId: loan.copyId })) { 
+            throw new ValidationError('This copy is already loaned')
+        }
+
         checkLoan(loan);
         loan.id = uuid();
         this.db.push("/loans[]", loan);
