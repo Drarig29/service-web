@@ -14,14 +14,14 @@ class CopyController {
     //     res.status(201).send(copy);
     // }
     
-    // get(req, res) {
-    //     const copy = this.copyRepository.get(req.params.copyId);
-    //     if (copy == null) {
-    //         res.status(404).send(null);
-    //     } else {
-    //         res.status(200).send(copy);
-    //     }
-    // }
+    get(req, res) {
+        const copy = this.copyRepository.get(req.params.bookId, req.params.copyId);
+        if (copy == null) {
+            res.status(404).send(null);
+        } else {
+            res.status(200).send(copy);
+        }
+    }
     
     // update(req, res) {
     //     const copy = this.copyRepository.update(req.params.copyId, req.body)
