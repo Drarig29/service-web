@@ -8,11 +8,11 @@ class UserController {
         res.json(users);
     }
 
-    // create(req, res) {
-    //     const user = this.userRepository.add(req.body);
-    //     res.location('/users/' + user.id);
-    //     res.status(201).send(user);
-    // }
+    create(req, res) {
+        const user = this.userRepository.add(req.body);
+        res.location('/users/' + user.id);
+        res.status(201).send(user);
+    }
     
     // get(req, res) {
     //     const user = this.userRepository.get(req.params.userId);

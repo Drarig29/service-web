@@ -2,11 +2,15 @@ const { v4: uuid } = require('uuid');
 const _ = require('lodash');
 const ValidationError = require('./validationError');
 
-// const checkBook = function(book) {
-//     if (!book.name) {
-//         throw new ValidationError('The book must have a name.');
-//     }
-// }
+const checkUser = function(user) {
+    if (!user.name) {
+        throw new ValidationError('The user must have a name.');
+    }
+
+    if (!user.age) {
+        throw new ValidationError('The user must have an age.');
+    }
+}
 
 class UserRepository {
     constructor(db) {
@@ -17,14 +21,12 @@ class UserRepository {
         return this.db.getData("/users");
     }
 
-    // add(book) {
-    //     checkBook(book); 
-    //     book.id = uuid();
-    //     book.copies = []; // initialize empty copy array
-    //     this.db.push("/books[]", book);
-
-    //     return book;
-    // }
+    add(user) {
+        checkUser(user); 
+        user.id = uuid();
+        this.db.push("/users[]", user);
+        return user;
+    }
 
     // get(id) {
     //     const books = this.getAll();
