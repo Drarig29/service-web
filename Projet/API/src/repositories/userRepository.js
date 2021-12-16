@@ -57,15 +57,15 @@ class UserRepository {
         
     // }
 
-    // getIdPath(id) {
-    //     const books = this.getAll();
-    //     const index = _.findIndex(books, { id });
-    //     if (index == -1) {
-    //         return null;
-    //     }
+    getIdPath(id) {
+        const users = this.getAll();
+        const index = _.findIndex(users, { id });
+        if (index == -1) {
+            return null;
+        }
 
-    //     return '/books[' + index + ']';
-    // }
+        return '/users[' + index + ']';
+    }
 }
 
 module.exports = UserRepository;

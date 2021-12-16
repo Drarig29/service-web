@@ -31,7 +31,7 @@ const userController = new UserController(userRepository);
 const copyRepository = new CopyRepository(db, bookRepository);
 const copyController = new CopyController(copyRepository);
 
-const loanRepository = new LoanRepository(db, bookRepository);
+const loanRepository = new LoanRepository(db, userRepository, copyRepository);
 const loanController = new LoanController(loanRepository);
 
 // Création du serveur

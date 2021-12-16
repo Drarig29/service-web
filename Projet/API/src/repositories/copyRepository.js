@@ -15,6 +15,11 @@ class CopyRepository {
     }
 
     getAll(bookId) {
+        if (bookId === undefined) {
+            const books = this.bookRepository.getAll();
+            return _.concat(...books.map(book => book.copies));
+        }
+        
         const bookPath = this.bookRepository.getIdPath(bookId);
         if (bookPath == null) {
             throw new ValidationError('This book does not exists')
@@ -47,6 +52,16 @@ class CopyRepository {
         }
 
         return this.db.getData(copyPath);
+    }
+
+    exists(copyId) {
+        const copies = this.getAll();
+        const index = _.findIndex(copies, { id: copyId });
+        if (index == -1) {
+            return false;
+        }
+
+        return true;
     }
 
     getIdPath(bookId, id) {

@@ -2,15 +2,17 @@ const { v4: uuid } = require('uuid');
 const _ = require('lodash');
 const ValidationError = require('./validationError');
 
-const checkLoan = function(loan) {
+const checkLoan = function (loan) {
     if (!loan.loanDate) {
         throw new ValidationError('The loan must have a loanDate.');
     }
 }
 
 class LoanRepository {
-    constructor(db) {
+    constructor(db, userRepository, copyRepository) {
         this.db = db;
+        this.userRepository = userRepository;
+        this.copyRepository = copyRepository;
     }
 
     getAll() {
@@ -18,7 +20,17 @@ class LoanRepository {
     }
 
     add(loan) {
-        checkLoan(loan); 
+        const userPath = this.userRepository.getIdPath(loan.userId);
+        if (userPath == null) {
+            throw new ValidationError('This user does not exists')
+        }
+
+        const copyExists = this.copyRepository.exists(loan.copyId);
+        if (!copyExists) {
+            throw new ValidationError('This copy does not exists')
+        }
+
+        checkLoan(loan);
         loan.id = uuid();
         this.db.push("/loans[]", loan);
         return loan;
@@ -50,7 +62,7 @@ class LoanRepository {
     //     if (path != null) {
     //         this.db.delete(path);
     //     }
-        
+
     // }
 
     // getIdPath(id) {

@@ -9,13 +9,13 @@ class LoanController {
     }
 
     create(req, res) {
-        const loan = this.loanRepository.add(req.params.bookId, req.body);
+        const loan = this.loanRepository.add(req.body);
         res.location('/copies/' + loan.id);
         res.status(201).send(loan);
     }
     
     get(req, res) {
-        const loan = this.loanRepository.get(req.params.bookId, req.params.loanId);
+        const loan = this.loanRepository.get(req.params.loanId);
         if (loan == null) {
             res.status(404).send(null);
         } else {
