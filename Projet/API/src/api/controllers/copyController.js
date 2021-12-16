@@ -4,15 +4,15 @@ class CopyController {
     }
 
     getAll(req, res) {
-        const copys = this.copyRepository.getAll(req.params.bookId);
-        res.json(copys);
+        const copies = this.copyRepository.getAll(req.params.bookId);
+        res.json(copies);
     }
 
-    // create(req, res) {
-    //     const copy = this.copyRepository.add(req.body);
-    //     res.location('/copys/' + copy.id);
-    //     res.status(201).send(copy);
-    // }
+    create(req, res) {
+        const copy = this.copyRepository.add(req.params.bookId, req.body);
+        res.location('/copies/' + copy.id);
+        res.status(201).send(copy);
+    }
     
     get(req, res) {
         const copy = this.copyRepository.get(req.params.bookId, req.params.copyId);
