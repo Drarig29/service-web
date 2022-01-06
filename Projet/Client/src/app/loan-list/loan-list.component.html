@@ -11,7 +11,7 @@
                 <h5 class="card-title">Copy Id</h5>
                 <p class="card-text"> {{loan.copyId}}</p>
                 <h5 class="card-title">User</h5>
-                <p class="card-text">{{this.userService.getUserById(loan.userId).name}}</p>
+                <p class="card-text">{{loan.user?.name}}</p>
                 <h5 class="card-title" *ngIf="loan.loanDate">Loan date</h5>
                 <p class="card-text" *ngIf="loan.loanDate">{{loan.loanDate}}</p>
                 <a [routerLink]="'/loans'" class="btn btn-outline-primary" (click)="returnLoan(loan.copyId)">Return</a>

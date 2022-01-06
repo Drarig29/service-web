@@ -34,6 +34,7 @@ export class LoanListComponent implements OnInit {
   private addCopy(loans: Loan[]) {
     for (const loan of loans) {
       this.bookService.getByCopyId(loan.copyId).pipe(tap(book => loan.book = book)).subscribe();
+      this.userService.getById(loan.userId).pipe(tap(user => loan.user = user)).subscribe();
     }
   }
 

@@ -8,6 +8,11 @@ class UserController {
         res.json(users);
     }
 
+    get(req, res) {
+        const user = this.userRepository.getById(req.params.userId);
+        res.json(user);
+    }
+
     create(req, res) {
         const user = this.userRepository.add(req.body);
         res.location('/users/' + user.id);

@@ -10,15 +10,11 @@ export class UserService extends BaseHttpService {
   public getAll(): Observable<User[]> {
     /*To be implemented*/
     return this.http.get<User[]>(`${this.baseUrl}/users`);
-    
+
     //return of([new User('myId', 'Fake user', 42), new User('myId', 'Fake user 2', 666)]);
   }
 
-  // TODO : api pour avoir l'est info d'un seul USER 
-
-  public getUserById(userId): Observable<User>{
+  public getById(userId): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/users/${userId}`);
   }
-
-  
 }

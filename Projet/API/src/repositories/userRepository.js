@@ -21,41 +21,21 @@ class UserRepository {
         return this.db.getData("/users");
     }
 
+    getById(userId) {
+        const userPath = this.getIdPath(userId);
+        if (userPath == null) {
+            throw new ValidationError('This user does not exists')
+        }
+
+        return this.db.getData(userPath);
+    }
+
     add(user) {
         checkUser(user); 
         user.id = uuid();
         this.db.push("/users[]", user);
         return user;
     }
-
-    // get(id) {
-    //     const books = this.getAll();
-    //     return _.find(books, { id });
-    // }
-
-    // update(id, book) {
-    //     if (book.id !== id) {
-    //         throw new ValidationError('You cannot change the identifier.');
-    //     }
-
-    //     checkBook(book); 
-    //     const path = this.getIdPath(id);
-    //     if (path == null) {
-    //         throw new ValidationError('This book does not exists');
-    //     }
-
-    //     this.db.push(path, book);
-
-    //     return book;
-    // }
-
-    // delete(id) {
-    //     const path = this.getIdPath(id);
-    //     if (path != null) {
-    //         this.db.delete(path);
-    //     }
-        
-    // }
 
     getIdPath(id) {
         const users = this.getAll();
