@@ -57,7 +57,7 @@ class CopyRepository {
     exists(copyId) {
         const copies = this.getAll();
         const index = _.findIndex(copies, { id: copyId });
-        if (index == -1) {
+        if (index === -1) {
             return false;
         }
 

@@ -1,4 +1,4 @@
-import { Observable, pipe } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { Component, OnInit } from '@angular/core';

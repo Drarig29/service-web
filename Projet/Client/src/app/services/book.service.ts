@@ -1,4 +1,3 @@
-
 import { Observable } from 'rxjs';
 
 import { Injectable } from '@angular/core';
@@ -16,5 +15,9 @@ export class BookService extends BaseHttpService {
   public get(bookId: string): Observable<Book> {
     return this.http
       .get<Book>(`${this.baseUrl}/books/${bookId}`);
+  }
+
+  public getByCopyId(copyId: string):Observable<Book> {
+    return this.http.get<Book>(`${this.baseUrl}/books?copyId=${copyId}`);
   }
 }

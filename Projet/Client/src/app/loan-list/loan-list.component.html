@@ -4,7 +4,7 @@
     <div *ngFor="let loan of loans" class="col-lg-6">
         <div class="card mb-3">
             <h4 class="card-header">
-                {{this.bookService.get(loan.copyId).name}}
+                {{loan.book?.name}}
             </h4>
 
             <div class="card-body">

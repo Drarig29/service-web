@@ -1,12 +1,11 @@
 import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { tap } from 'rxjs/operators';
 
+import { Component, OnInit } from '@angular/core';
 
 import { Loan } from '../model/loan';
 import { LoanService } from '../services/loan.service';
-import { Book } from '../model/book';
 import { BookService } from '../services/book.service';
-import { User } from '../model/user';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -16,24 +15,26 @@ import { UserService } from '../services/user.service';
 })
 export class LoanListComponent implements OnInit {
   public loans$: Observable<Loan[]>;
-  
 
-  constructor( 
+  constructor(
     private loanService: LoanService,
-    private bookService : BookService,
-    private userService : UserService
-    ) { }
+    private bookService: BookService,
+    private userService: UserService
+  ) { }
 
   ngOnInit() { this.init(); }
 
   public init() {
-    this.loans$ = this.loanService.getAll();
+    this.loans$ = this.loanService.getAll()
+      .pipe(
+        tap(this.addCopy.bind(this))
+      );
+  }
 
-    /* 
-    .pipe(
-       tap(this.addCopies.bind(this))
-     );
-     */
+  private addCopy(loans: Loan[]) {
+    for (const loan of loans) {
+      this.bookService.getByCopyId(loan.copyId).pipe(tap(book => loan.book = book)).subscribe();
+    }
   }
 
   private returnLoan(copyId) {

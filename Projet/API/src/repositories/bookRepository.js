@@ -2,7 +2,7 @@ const { v4: uuid } = require('uuid');
 const _ = require('lodash');
 const ValidationError = require('./validationError');
 
-const checkBook = function(book) {
+const checkBook = function (book) {
     if (!book.name) {
         throw new ValidationError('The book must have a name.');
     }
@@ -18,7 +18,7 @@ class BookRepository {
     }
 
     add(book) {
-        checkBook(book); 
+        checkBook(book);
         book.id = uuid();
         book.copies = []; // initialize empty copy array
         this.db.push("/books[]", book);
@@ -31,12 +31,27 @@ class BookRepository {
         return _.find(books, { id });
     }
 
+    getByCopyId(copyId) {
+        const books = this.getAll();
+        const book = books.find(book => book.copies.some(copy => copy.id === copyId));
+
+        if (!book) {
+            throw new ValidationError('This book does not exists');
+        }
+
+        return {
+            name: book.name,
+            author: book.author,
+            id: book.id,
+        };
+    }
+
     update(id, book) {
         if (book.id !== id) {
             throw new ValidationError('You cannot change the identifier.');
         }
 
-        checkBook(book); 
+        checkBook(book);
         const path = this.getIdPath(id);
         if (path == null) {
             throw new ValidationError('This book does not exists');
@@ -52,7 +67,7 @@ class BookRepository {
         if (path != null) {
             this.db.delete(path);
         }
-        
+
     }
 
     getIdPath(id) {

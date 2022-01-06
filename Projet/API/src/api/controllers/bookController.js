@@ -4,6 +4,12 @@ class BookController {
     }
 
     getAll(req, res) {
+        if (req.query.copyId) {
+            const book = this.bookRepository.getByCopyId(req.query.copyId);
+            res.json(book);
+            return;
+        }
+        
         const books = this.bookRepository.getAll();
         res.json(books);
     }
@@ -13,7 +19,7 @@ class BookController {
         res.location('/books/' + book.id);
         res.status(201).send(book);
     }
-    
+
     get(req, res) {
         const book = this.bookRepository.get(req.params.bookId);
         if (book == null) {
@@ -22,12 +28,12 @@ class BookController {
             res.status(200).send(book);
         }
     }
-    
+
     update(req, res) {
         const book = this.bookRepository.update(req.params.bookId, req.body)
         res.status(200).send(book);
     }
-    
+
     delete(req, res) {
         this.bookRepository.delete(req.params.bookId);
         res.status(204).send(null);
