@@ -1,0 +1,21 @@
+<p>loan-list works!</p>
+<button class="btn btn-primary mb-3" (click)="init()">Refresh</button>
+<div class="row" *ngIf="loans$ | async as loans">
+    <div *ngFor="let loan of loans" class="col-lg-6">
+        <div class="card mb-3">
+            <h4 class="card-header">
+                {{this.bookService.get(loan.copyId).name}}
+            </h4>
+
+            <div class="card-body">
+                <h5 class="card-title">Copy Id</h5>
+                <p class="card-text"> {{loan.copyId}}</p>
+                <h5 class="card-title">User</h5>
+                <p class="card-text">{{this.userService.getUserById(loan.userId).name}}</p>
+                <h5 class="card-title" *ngIf="loan.loanDate">Loan date</h5>
+                <p class="card-text" *ngIf="loan.loanDate">{{loan.loanDate}}</p>
+                <a [routerLink]="'/loans'" class="btn btn-outline-primary" (click)="returnLoan(loan.copyId)">Return</a>
+            </div>
+        </div>
+    </div>
+</div>

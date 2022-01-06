@@ -27,7 +27,12 @@
             "name": "La ferme de animaux",
             "author": "George Orwell",
             "id": "6cbc92e0-da86-11e7-b397-fd0e15229f62",
-            "copies": []
+            "copies": [
+                {
+                    "submissionDate": "2021/12/16",
+                    "id": "15d9a8c2-3ff1-4712-b612-b51aec0ce557"
+                }
+            ]
         },
         {
             "name": "Assassin Apprentice",
@@ -47,6 +52,11 @@
             "name": "Corentin",
             "age": 19,
             "id": "66c6a466-1a3a-427f-9c03-3ce8b61f92df"
+        },
+        {
+            "name": "Farouk",
+            "age": 45,
+            "id": "31e1a9f0-bf43-4066-ab1e-b94de7b9c52d"
         }
     ],
     "loans": [
@@ -61,6 +71,18 @@
             "copyId": "6f3249a7-03d3-4c55-b6af-a074803c9522",
             "loanDate": "2021/12/07",
             "id": "45435689-d2af-4475-8ab7-d827fedb330c"
+        },
+        {
+            "userId": "66c6a466-1a3a-427f-9c03-3ce8b61f92df",
+            "copyId": "cbfca3b0-dabf-11e7-b993-41ea43809602",
+            "loanDate": "2021/12-16",
+            "id": "882e332e-726f-40fa-8c65-208760119d18"
+        },
+        {
+            "userId": "31e1a9f0-bf43-4066-ab1e-b94de7b9c52d",
+            "copyId": "c2da13d0-dabf-11e7-8fb4-b99f7664c177",
+            "loanDate": "2021/12-16",
+            "id": "d00bb546-6852-4763-8f72-21c4a46df4bb"
         }
     ]
 }
