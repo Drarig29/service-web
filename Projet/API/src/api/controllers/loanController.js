@@ -38,10 +38,10 @@ class LoanController {
     //     res.status(200).send(loan);
     // }
     
-    // delete(req, res) {
-    //     this.loanRepository.delete(req.params.loanId);
-    //     res.status(204).send(null);
-    // }
+    delete(req, res) {
+        this.loanRepository.delete(req.params.loanId);
+        res.status(204).send(null);
+    }
 }
 
 module.exports = LoanController;

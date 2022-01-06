@@ -14,7 +14,7 @@
                 <p class="card-text">{{loan.user?.name}}</p>
                 <h5 class="card-title" *ngIf="loan.loanDate">Loan date</h5>
                 <p class="card-text" *ngIf="loan.loanDate">{{loan.loanDate}}</p>
-                <a [routerLink]="'/loans'" class="btn btn-outline-primary" (click)="returnLoan(loan.copyId)">Return</a>
+                <a [routerLink]="'/loans'" class="btn btn-outline-primary" (click)="returnLoan(loan.id)">Return</a>
             </div>
         </div>
     </div>

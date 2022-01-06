@@ -47,7 +47,7 @@ class LoanRepository {
         }
 
         const loans = this.getAll();
-        if (_.some(loans, { copyId: loan.copyId })) { 
+        if (_.some(loans, { copyId: loan.copyId })) {
             throw new ValidationError('This copy is already loaned')
         }
 
@@ -78,23 +78,22 @@ class LoanRepository {
     //     return book;
     // }
 
-    // delete(id) {
-    //     const path = this.getIdPath(id);
-    //     if (path != null) {
-    //         this.db.delete(path);
-    //     }
+    delete(id) {
+        const path = this.getIdPath(id);
+        if (path != null) {
+            this.db.delete(path);
+        }
+    }
 
-    // }
+    getIdPath(id) {
+        const loans = this.getAll();
+        const index = _.findIndex(loans, { id });
+        if (index == -1) {
+            return null;
+        }
 
-    // getIdPath(id) {
-    //     const books = this.getAll();
-    //     const index = _.findIndex(books, { id });
-    //     if (index == -1) {
-    //         return null;
-    //     }
-
-    //     return '/books[' + index + ']';
-    // }
+        return '/loans[' + index + ']';
+    }
 }
 
 module.exports = LoanRepository;

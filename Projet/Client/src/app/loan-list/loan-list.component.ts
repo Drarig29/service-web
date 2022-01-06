@@ -19,7 +19,7 @@ export class LoanListComponent implements OnInit {
   constructor(
     private loanService: LoanService,
     private bookService: BookService,
-    private userService: UserService
+    private userService: UserService,
   ) { }
 
   ngOnInit() { this.init(); }
@@ -39,6 +39,6 @@ export class LoanListComponent implements OnInit {
   }
 
   private returnLoan(copyId) {
-    this.loanService.return(copyId).subscribe();
+    this.loanService.return(copyId).subscribe(() => window.location.reload());
   }
 }
